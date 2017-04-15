@@ -1,4 +1,7 @@
 /**
+ * Two basic searching algorithms to find a [index, value] pair in a
+ * field.
+ *
  * Import this class into your project's source and access
  * it's methods by calling e.g SimpleSearches.linSearch(parameters).
  * */
@@ -10,7 +13,7 @@ public class SimpleSearches {
      *
      * We're dealing with Object Arrays here, so this algorithm can
      * search for every value which is (or inherits from) the Object class.
-     * @param input
+     * @param field
      *      the array in which to search for a specific object or value.
      * @param value
      *      the desired value we're looking for in 'input'.
@@ -25,14 +28,14 @@ public class SimpleSearches {
      *      So if you need to check whether you actually found the
      *      value, just check for '!= -1' and you're golden!
      * */
-    public static Object[] linSearch(Object[] input, Object value){
+    public static Object[] linSearch(Object[] field, Object value){
         int i = 0;
-        int n = input.length;
+        int n = field.length;
         Object[] returns = new Object[] {-1, -1};
         boolean done = false;
 
         do {
-            if(input[i] == value){
+            if(field[i] == value){
                 done = true;
                 returns[0] = i;
                 returns[1] = value;
@@ -54,7 +57,7 @@ public class SimpleSearches {
      *
      * We're dealing with Object Arrays here, so this algorithm can
      * search for every value which is (or inherits from) the Object class.
-     * @param input
+     * @param field
      *      the array in which to search for a specific object or value.
      * @param value
      *      the desired value we're looking for in 'input'.
@@ -73,10 +76,10 @@ public class SimpleSearches {
      *      So if you need to check whether you actually found the
      *      value, just check for '!= -1' and you're golden!
      * */
-    public static Object[] linSearchInBounds (Object[] input, int lb, int ub, Object value) {
+    public static Object[] linSearchInBounds (Object[] field, int lb, int ub, Object value) {
         Object[] output = new Object[] {-1, -1};
         for(int i = lb; i <= ub; i++) {
-            if(input[i] == value) {
+            if(field[i] == value) {
                 output[0] = i;
                 output[1] = value;
                 return output;
@@ -93,7 +96,7 @@ public class SimpleSearches {
      * the state of your input is unknown, use one of the sorting algorithms below
      * and use the returned array as new input.
      *
-     * @param input
+     * @param field
      *      the int array on which the binary search gets performed
      * @param value
      *      the value to search for in the input
@@ -105,17 +108,17 @@ public class SimpleSearches {
      *      However, for a hit in the first few indices this method is slightly
      *      slower than classic linear searches.
      * */
-    public static int[] binSearch(int[] input, int value){
-        int n = input.length;
+    public static int[] binSearch(int[] field, int value){
+        int n = field.length;
         int i = 0, j = n - 1, mid;
         int[] returns = new int[] {-1, -1};
         boolean done = false;
         do {
             mid = (i+j)/2;
-            if (value < input[mid]) {
+            if (value < field[mid]) {
                 j = mid - 1;
             } else {
-                if (value > input[mid]) {
+                if (value > field[mid]) {
                     i = mid + 1;
                 } else {
                     done = true;
@@ -135,7 +138,7 @@ public class SimpleSearches {
      * the state of your input is unknown, use one of the sorting algorithms below
      * and use the returned array as new input.
      *
-     * @param input
+     * @param field
      *      the int array on which the binary search gets performed
      * @param value
      *      the value to search for in the input
@@ -147,17 +150,17 @@ public class SimpleSearches {
      *      this function's return is exactly as the ones of the
      *      binary search algorithms.
      * */
-    public static int[] binSearchInBounds(int[] input, int lb, int ub, int value){
+    public static int[] binSearchInBounds(int[] field, int lb, int ub, int value){
         int n = ub-lb;
         int i = lb, j = ub, mid;
         int[] returns = new int[] {-1, -1};
         boolean done = false;
         do {
             mid = (i+j)/2;
-            if (value < input[mid]) {
+            if (value < field[mid]) {
                 j = mid - 1;
             } else {
-                if (value > input[mid]) {
+                if (value > field[mid]) {
                     i = mid + 1;
                 } else {
                     done = true;
